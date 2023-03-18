@@ -16,16 +16,24 @@ use App\Models\Listing;
 |
 */
 
+// Common Resource Routes:
+
+// index Show all listings
 Route::get('/', [ListingController::class, 'index']);
 
-
-Route::get('listings/{listing}', [ListingController::class, 'show'])->where('id', '[0-9]+');
-
-// Common Resource Routes: I
-// index Show all listings
-// show Show single listing
 // create - Show form to create new listing
+Route::get('listings/create', [ListingController::class, 'create']);
+
 // store Store new listing
+Route::post('/listings', [ListingController::class, 'store']);
+
+
 // edit Show form to edit listing
+Route::get('listings/{listing}/edit', [ListingController::class, 'edit']);
+
 // update - Update listing
 // destroy - pelete listing
+
+// show Show single listing
+Route::get('listings/{listing}', [ListingController::class, 'show'])->where('id', '[0-9]+');
+    
