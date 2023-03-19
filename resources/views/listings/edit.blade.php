@@ -7,8 +7,9 @@
             {{-- <p class="mb-4">Post a gig to find a developer</p> --}}
         </header>
 
-        <form method="POST" action="/listings" enctype="multipart/form-data">
+        <form method="POST" action="/listings/{{$listing->id}}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="mb-6">
                 <label for="company" class="inline-block text-lg mb-2">Company Name</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="company"
@@ -73,6 +74,10 @@
                 </label>
                 <input type="file" class="border border-gray-200 rounded p-2 w-full" name="logo"
                     value="{{ $listing->logo }}" />
+                <img class="w-48 mr-6 mb-6"
+                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}"
+                    alt="" />
+
                 @error('logo')
                     <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -93,7 +98,7 @@
 
             <div class="mb-6">
                 <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                    Create Gig
+                    Update Gig
                 </button>
 
                 <a href="/" class="text-black ml-4"> Back </a>
